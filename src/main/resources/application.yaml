@@ -1,0 +1,67 @@
+server:
+  port: ${APP_SERVER_PORT:9090}
+
+tarantool:
+  url: ${TARANTOOL_URL:localhost:3301}
+  username: ${TARANTOOL_USER:user}
+  password: ${TARANTOOL_PASSWORD:pass}
+
+spring:
+  application:
+    name: ${SPRING_APPLICATION_NAME:handbook}
+
+  kafka:
+    consumer:
+      bootstrap-servers: ${CONSUMER_SERVER:localhost:9092}
+      client-id: ${CONSUMER_CLIENT_ID:handbook}
+      group-id: ${CONSUMER_GROUP_ID:handbook-consumer}
+      enable-auto-commit: ${CONSUMER_ENABLE_AUTO_COMMIT:true}
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+      warmup-a-topic: ${WARMUP_A_TOPIC:topic-1}
+      warmup-b-topic: ${WARMUP_B_TOPIC:topic-2}
+      notify-a-topic: ${NOTIFY_A_TOPIC:topic-3}
+      notify-b-topic: ${NOTIFY_B_TOPIC:topic-4}
+
+      security:
+        protocol: ${CONSUMER_SECURE_PROTOCOL:PLAINTEXT}
+      ssl:
+        key-store-type: ${CONSUMER_KEYSTORE_TYPE:PKCS12}
+        key-store-location: ${CONSUMER_KEYSTORE:file:///home/jboss/kafka-keys/keystore.jks}
+        key-store-password: ${KEYSTORE_PASSWORD:password}
+        trust-store-type: ${CONSUMER_TRUSTSTORE_TYPE:PKCS12}
+        trust-store-location: ${CONSUMER_TRUSTSTORE:file:///home/jboss/kafka-keys/truststore.jks}
+        trust-store-password: ${TRUSTSTORE_PASSWORD:password}
+        key-password: ${KEY_PASSWORD:password}
+
+  liquibase:
+    change-log: classpath:changelog/changelog.yml
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${DB_URL}
+    username: ${DB_USER}
+    password: ${DB_PASS}
+
+application:
+  warmupUrl: ${WARMUP_RQ_URL:https://someurl.ru}
+  warmupAPath: ${WARMUP_A_RQ_PATH:/pathA}
+  warmupBPath: ${WARMUP_B_RQ_PATH:/pathB}
+
+  warmup-thread-pool: ${WARMUP_THREAD_POOL:20}
+  notify-thread-pool: ${NOTIFY_THREAD_POOL:20}
+  a-save-tt-thread-pool: ${A_SAVE_TT_THREAD_POOL:20}
+  b-save-tt-thread-pool: ${B_SAVE_TT_THREAD_POOL:20}
+  notify-save-tt-thread-pool: ${NOTIFY_SAVE_TT_THREAD_POOL:10}
+
+  check-warmup-fixed-delay: ${CHECK_WARMUP_FIXED_DELAY:900000}
+  check-warmup-initial-delay: ${CHECK_WARMUP_INITIAL_DELAY:900000}
+
+  num-of-entries-to-main-cache: ${NUM_OF_ENTRIES_TO_MAIN_CACHE:500}
+
+  timeout-between-requests: ${TIMEOUT_BETWEEN_REQUEST:5000}
+  rq-duration-start-range: ${RQ_DURATION_START_RANGE:1000}
+  rq-duration-end-range: ${RQ_DURATION_END_RANGE:20000}
+
+  tt-save-pause: ${TT_SAVE_PAUSE:50}

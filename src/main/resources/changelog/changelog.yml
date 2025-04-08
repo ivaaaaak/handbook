@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: EAKanukova
+  - include:
+      file: ddl/add_warmup.sql
+      relativeToChangelogFile: true
+  - changeSet:
+      id: 2
+      author: EAKanukova
+  - include:
+      file: ddl/add_buffer_notify.sql
+      relativeToChangelogFile: true
